@@ -247,13 +247,13 @@
     \node[graybox, right=0.8cm of C2] (sink2) {sink};
     
     % 5. Bronze S3
-    \node[bronze, right=0.95cm of $(sink1)!0.5!(sink2)$] (Bronze) {Bronze\\S3};
+    \node[bronze, right=0.95cm of $(sink1)!0.5!(sink2)$] (Bronze) {Bronze};
     
     % 6. ETL gray box
     \node[graybox, right=2.1cm of Bronze] (ETL1) {ETL};
-    \node[silver, right=0.9cm of ETL1] (Silver) {Silver\\S3};
+    \node[silver, right=0.9cm of ETL1] (Silver) {Silver};
     \node[graybox, right=2.1cm of Silver] (ETL2) {ETL};
-    \node[gold, right=0.9cm of ETL2] (Gold) {Gold\\S3};
+    \node[gold, right=0.9cm of ETL2] (Gold) {Gold};
     
     % 7. Glue Crawler and Glue Catalog, placed above Bronze
     \node[crawler, above=1.5cm of Bronze] (Crawler) {Crawler};
@@ -814,6 +814,7 @@ myarrow/.style={thick,->},
         \end{itemize}
     
     }
+    \resumeSubProjectListStart
     \resumeSubProject{\textbf{스케줄러 전환: Jenkins → Airflow}}
     {
     
@@ -845,6 +846,10 @@ myarrow/.style={thick,->},
     \vspace{2mm}
     }
 
+    \resumeSubProjectListEnd
+
+    %---------------- 서브 프로젝트 End
+
     \textbf{문제 해결(링크)}:
         \begin{itemize}
             \item \href{https://superhuman54.github.io/posts/conflict-between-emr-and-aws-sdk/}{Amazon EMR 6.12와 AWS Java SDK 충돌 문제}
@@ -854,10 +859,6 @@ myarrow/.style={thick,->},
         \end{itemize}
     
     %---------------- 트러블슛 End
-
-    \resumeSubProjectListEnd
-
-    %---------------- 서브 프로젝트 End
 
   \resumeProjectListEnd
 
