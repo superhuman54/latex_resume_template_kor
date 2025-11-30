@@ -453,7 +453,7 @@
         \node[apiServer, right=2.3cm of S3A] (EE) {Embedding\\Extract};
         
         % CDN 서버 노드 (서브 브랜치, 아래에)
-        \node[cdn, below=1.5cm of EE] (CDN) {CDN Server};
+        \node[cdn, below=1.5cm of EE] (CDN) {CDN};
         
         % Vector DB
         \node[vectordb, right=2.3cm of EE] (VDB) {Vector DB};
@@ -468,7 +468,7 @@
         \node[apiServer, right=2.3cm of S3B] (C) {Compile};
         
         % Slack Notify 노드
-        \node[notifbox, right=2.3cm of C] (SN) {Slack Notify};
+        \node[notifbox, right=2.3cm of C] (SN) {Slack};
         
         % 라벨링
         \node[labelbox, above=0.32cm of $(PP)!0.5!(S3A)$] (l1) {write};
@@ -636,7 +636,7 @@
     node distance=1.1cm and 1.5cm
 ]
 % 노드들 위치 지정
-\node[blueblock] (bi) at (0, 0.7) {BI};
+\node[blueblock] (bi) at (0, 0.7) {Superset};
 \node[blueblock, below=1.1cm of bi] (tadpole) {Tadpole};
 \node[smallblock, right=2.8cm of $(bi)!0.5!(tadpole)$] (trino) {Trino};
 \node[tealblock, right=3.5cm of trino, yshift=1.0cm] (prom) {Prometheus};
@@ -810,7 +810,7 @@ myarrow/.style={thick,->},
     
     \textbf{주요 성과}:
         \begin{itemize}
-            \item 기존 Jenkins Groovy 스크립트를 Python 기반 Airflow Operator로 전환하여 언어,플랫폼 일관성 확보, 코드 리뷰·테스트 자동화 적용으로 개발 생산성 향상
+            \item 기존 ETL 워크플로우 스케줄러를 Jenkins에서 Airflow로 전환하여 언어, 플랫폼 일관성 확보로 개발 생산성 향상
         \end{itemize}
     
     }
@@ -818,8 +818,7 @@ myarrow/.style={thick,->},
     \resumeSubProject{\textbf{스케줄러 전환: Jenkins → Airflow}}
     {
     
-    기존 Jenkins Groovy 스크립트를 Python 기반 Airflow Operator 및 Sensor로 전환하여  
-    언어,플랫폼 일관성을 확보하고, Airflow(Amazon MWAA) DAG로 모든 스케줄링을 통합하였습니다.
+    DynamoDB, K8s Pod 등의 Airflow Operator 및 Sensor를 생성하고, DAG를 작성하여 모든 스케줄링을 통합하였습니다.
         \vspace{1mm}
         
         \textbf{사용한 기술}: Amazon MWAA, Python, Amazon EKS, Amazon Cloudwatch
@@ -829,10 +828,10 @@ myarrow/.style={thick,->},
     \resumeSubProject{\textbf{데이터 적재 자동화 및 모니터링 시스템 구축}}
     {
     
-    Amazon S3를 데이터 레이크로 구축하고 AWS Glue Catalog와 연동하여 메타데이터 관리를 체계화했습니다. CloudWatch를 활용해 Amazon MWAA 및 EKS 클러스터 모니터링 시스템을 구현하고, Airflow DAG을 작성하여 자동화된 데이터 파이프라인을 운영하였습니다. 또한 Spark on EMR 작업 중 장애 발생 시 Sentry로 에러를 실시간 레포팅하도록 설정하였습니다.  
+    Amazon S3를 데이터 레이크로 구축하고 AWS Glue Catalog와 연동하여 메타데이터 관리를 체계화했습니다. CloudWatch를 활용해 Amazon MWAA 및 EKS 클러스터 모니터링 시스템을 구현하고, Airflow DAG을 작성하여 자동화된 데이터 파이프라인을 운영하였습니다.
 
         \vspace{1mm}
-        \textbf{사용한 기술}: Amazon Glue Catalog, Amazon MWAA, Amazon EKS, Amazon CloudWatch, Sentry 
+        \textbf{사용한 기술}: Amazon Glue Catalog, Amazon MWAA, Amazon EKS, Amazon CloudWatch 
         \vspace{2mm}
     }
     
@@ -852,9 +851,9 @@ myarrow/.style={thick,->},
 
     \textbf{문제 해결(링크)}:
         \begin{itemize}
+            \item \href{https://superhuman54.github.io/posts/fail-to-releases-pods-on-the-same-k8s/}{공유 Kubernetes 클러스터에서 Airflow Pod 중복 생성 및 회수 실패 문제}
             \item \href{https://superhuman54.github.io/posts/conflict-between-emr-and-aws-sdk/}{Amazon EMR 6.12와 AWS Java SDK 충돌 문제}
             \item \href{https://superhuman54.github.io/posts/low-throughput-for-writing-to-dynamodb/}{Spark에서 DynamoDB 쓰기 성능 저하 문제}
-            \item \href{https://superhuman54.github.io/posts/fail-to-releases-pods-on-the-same-k8s/}{공유 Kubernetes 클러스터에서 Airflow Pod 중복 생성 및 회수 실패 문제}
             \item \href{https://superhuman54.github.io/posts/failed-to-release-completed-pod/}{Amazon MWAA에서 Kubernetes Pod 회수 실패 문제}
         \end{itemize}
     
@@ -864,7 +863,52 @@ myarrow/.style={thick,->},
 
 
 %-------------------------------------------
-\section{\textbf{5. 추천 데이터 HTTP 서버 구축과 운영}}
+\section{\textbf{5. PySpark에서 Polars로의 마이그레이션}}
+  \resumeProjectListStart
+    \resumeProject
+    {\textbf{소속}: 드림어스컴퍼니} {}
+    
+    {\textbf{주요 내용}:
+    
+    음악 스트리밍 플랫폼의 "연령별 차트" 집계 워크플로우를 소규모 EMR 클러스터에서 단일 EC2 인스턴스 기반 Polars로 전환한 프로젝트입니다. 기존 PySpark 환경에서는 클러스터 생성에 6분, 실제 집계에 4분으로 총 10분이 소요되었으나, 단일 노드 쿼리 엔진인 Polars로 전환하여 약 1분으로 단축했습니다. 워크로드 특성 분석을 통해 분산 처리가 과도하다고 판단하고, Apache Arrow 기반의 효율적인 단일 머신 쿼리 엔진을 도입하여 성능과 비용을 동시에 최적화했습니다.
+
+    \vspace{3mm}
+    
+    \textbf{주요 성과}:
+        \begin{itemize}
+            \item 집계 작업 수행 시간 85.42\% 감소 (4분 5초 → 36초)
+            \item 하드웨어 스펙 축소: 2노드(8 코어) → 단일 노드(4 코어), 메모리 48GB → 12GB
+            \item 월간 운영 비용 71.13\% 절감 (\$19.81 → \$5.72)
+        \end{itemize}
+    
+    }
+    \resumeSubProjectListStart
+    \resumeSubProject{\textbf{워크로드 특성 분석 및 단일 노드 엔진 전환}}
+    {
+    
+    3개월간 워크플로우 모니터링 결과 데이터 볼륨이 일정하고 클러스터 생성 시간이 실제 작업 시간보다 길어 분산 처리 오버헤드가 과도함을 확인했습니다. Polars의 LazyFrame 최적화와 Python API를 고려하여 단일 노드 엔진으로 전환했습니다.
+        \vspace{1mm}
+        
+        \textbf{사용한 기술}: Apache Spark, Polars, Amazon EKS
+        \vspace{2mm}
+    }
+
+    \resumeSubProjectListEnd
+
+    %---------------- 서브 프로젝트 End
+
+    \textbf{문제 해결(링크)}:
+        \begin{itemize}
+            \item \href{https://superhuman54.github.io/posts/journey-to-polars/}{PySpark에서 Polars로의 마이그레이션: 85\% 성능 향상과 71\% 비용 절감}
+        \end{itemize}
+    
+    %---------------- 트러블슛 End
+
+  \resumeProjectListEnd
+
+
+%-------------------------------------------
+\section{\textbf{6. 추천 데이터 HTTP 서버 구축과 운영}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
