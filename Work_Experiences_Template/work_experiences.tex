@@ -117,7 +117,72 @@
 \end{tabular*}
 
 %-----------PROJECTS-----------------
-\section{\textbf{1. 액션로그 파이프라인}}
+\section{\textbf{1. Spark History MCP + AI Agent로 Spark 분석 자동화하기}}
+  \resumeProjectListStart
+    \resumeProject
+    {\textbf{소속}: 드림어스컴퍼니} {}
+    
+    {\textbf{주요 내용}:
+    
+    매일 수십 개의 Spark 배치 작업을 운영하는 환경에서 작업 실패 시 수동으로 Spark UI, CloudWatch Logs, EMR 콘솔을 오가며 수시간씩 디버깅하던 문제를 해결하기 위해 SparkListener, Spark History MCP, AI Agent를 결합한 자동 분석 시스템을 구축했습니다. Spark 작업 실패 시 자동으로 감지하여 AI가 Spark History Server의 메트릭을 조회하고 원인 분석 및 해결책을 제시하는 End-to-End 파이프라인을 n8n으로 구성하고, 분석 결과를 Slack으로 자동 전송하는 시스템을 구현했습니다.
+
+    \vspace{3mm}
+    
+    \textbf{주요 성과}:
+        \begin{itemize}
+            \item 트러블슈팅 단계 6단계 → 3단계 (50\% 감소)
+            \item 사람의 수동 분석 시간 100\% 감소 (최소 10분 이상 → 0분)
+            \item VPN 접속 및 여러 UI 탐색 불필요
+            \item Spark Observability 확보: 실시간 이벤트 캡처, 구조화된 메트릭 수집, 자동 분석 프로세스 구축
+        \end{itemize}
+    
+    }
+    \resumeSubProjectListStart
+    \resumeSubProject{\textbf{SparkListener 구현 및 EMR 통합}}
+    {
+    
+    Py4J를 활용하여 Python으로 Java SparkListenerInterface를 구현하고, Spark 작업 실행 중 발생하는 모든 이벤트(Stage 실패, OOM, Data Skew 등)를 실시간으로 감지하여 n8n Webhook으로 전송하는 리스너를 개발했습니다.
+
+        \vspace{1mm}
+        \textbf{사용한 기술}: PySpark, Amazon EMR
+        \vspace{2mm}
+    }
+    
+    \resumeSubProject{\textbf{Spark History MCP 서버 구축 및 Persistent History Server 지원}}
+    {
+    
+    AWS에서 오픈소스로 공개한 Spark History Server MCP를 기반으로, Transient EMR 클러스터 환경에서도 동작하도록 Persistent Spark History Server를 지원하도록 개선했습니다. 
+
+        \vspace{1mm}
+        \textbf{사용한 기술}: Spark History Server, MCP (Model Context Protocol), Python, Amazon EMR
+        \vspace{2mm}
+    }
+    
+    \resumeSubProject{\textbf{n8n AI Agent 워크플로우 구축}}
+    {
+    
+    n8n을 활용하여 Spark 에러 감지부터 분석 결과 전송까지의 전체 워크플로우를 자동화했습니다. HTTP Webhook으로 Spark 에러 정보를 수신하고, OpenAI GPT-5-mini 모델을 사용한 AI Agent가 Spark History MCP를 통해 메트릭을 조회하여 OOM, Data Skew, Shuffle Spill 등 원인을 분석하고 구체적인 해결책(설정 변경값, 단기/장기 전략)을 제시하도록 구성했습니다.
+
+    \vspace{1mm}
+    \textbf{사용한 기술}: n8n
+    \vspace{2mm}
+    }
+
+    \resumeSubProjectListEnd
+
+    %---------------- 서브 프로젝트 End
+
+    \textbf{문제 해결(링크)}:
+        \begin{itemize}
+            \item \href{https://music-flo.atlassian.net/wiki/spaces/~741938673/pages/4318134294}{Spark History MCP + AI Agent로 Spark 분석 자동화하기}
+        \end{itemize}
+    
+    %---------------- 트러블슛 End
+
+  \resumeProjectListEnd
+
+
+\section{\textbf{2. 액션로그 파이프라인}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
@@ -335,7 +400,7 @@
   \resumeProjectListEnd
 
 %-------------------------------------------
-\section{\textbf{2. 침해곡 탐지 파이프라인}}
+\section{\textbf{3. 침해곡 탐지 파이프라인}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
@@ -545,7 +610,7 @@
   \resumeProjectListEnd
 
 %-------------------------------------------
-\section{\textbf{3. \href{https://trino.io/}{Trino} 구축 및 운영}}
+\section{\textbf{4. \href{https://trino.io/}{Trino} 구축 및 운영}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
@@ -690,7 +755,7 @@
   \resumeProjectListEnd
 
 %-------------------------------------------
-\section{\textbf{4. Amazon S3 기반 데이터레이크, 데이터웨어하우스 운영}}
+\section{\textbf{5. Amazon S3 기반 데이터레이크, 데이터웨어하우스 운영}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
@@ -863,7 +928,7 @@ myarrow/.style={thick,->},
 
 
 %-------------------------------------------
-\section{\textbf{5. PySpark에서 Polars로의 마이그레이션}}
+\section{\textbf{6. PySpark에서 Polars로의 마이그레이션}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
@@ -908,7 +973,7 @@ myarrow/.style={thick,->},
 
 
 %-------------------------------------------
-\section{\textbf{6. 추천 데이터 HTTP 서버 구축과 운영}}
+\section{\textbf{7. 추천 데이터 HTTP 서버 구축과 운영}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
