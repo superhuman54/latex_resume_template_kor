@@ -160,7 +160,7 @@
             \resumeItem{Spark, Polars 데이터 처리 및 분석 시스템 개발}
             \resumeItem{사내 데이터 플랫폼 용도의 Trino 운영 및 최적화}
             \resumeItem{Amazon S3, Amazon Glue Catalog 기반 데이터레이크 및 데이터웨어하우스 운영}
-            \resumeItem{Amazon Glue Crawler 및 Spark 활용 준실시간 데이터 파이프라인 구축 및 운영}
+            \resumeItem{Amazon Glue ETL 및 Spark 활용 준실시간 데이터 파이프라인 구축 및 운영}
             \resumeItem{Amazon MWAA 활용 데이터 파이프라인 스케줄링 자동화}
             \resumeItem{음원 침해곡 탐지 파이프라인 운영}
             \resumeItem{유사도 검색 및 대규모 임베딩 관리를 위한 PostgreSQL 기반 벡터 데이터베이스 운영}
@@ -218,9 +218,8 @@
       {액션로그 파이프라인}
          {하루 약 2억 5천만 레코드를 처리하는 대용량 ETL 파이프라인 설계 및 운영}
          \resumeItemListStart
-            \resumeItem{Kafka Connect 기반 스트리밍 데이터 수집 및 Amazon Glue Crawler로 1시간 주기 준실시간 파티션 등록}
-            \resumeItem{메달리온 아키텍처 설계 및 클라이언트 조회 패턴 분석 기반 파티셔닝/버켓팅 최적화}
-            \resumeItem{Spark 작업 시간 35\% 단축 (22분→15분)}
+            \resumeItem{Kafka Connect 기반 스트리밍 데이터 수집 및 Amazon Glue ETL로 1시간 주기 준실시간 파티션 등록}
+            \resumeItem{메달리온 아키텍처 설계 및 클라이언트 조회 패턴 분석 기반 파티셔닝/버켓팅 최적화, 조회 속도 2.5배 증가}
          \resumeItemListEnd
     
     \resumeProject
@@ -236,8 +235,9 @@
       {쿼리 엔진 Trino 운영}
     {DW 조회를 위한 분산 쿼리 엔진 운영}
     \resumeItemListStart
-        \resumeItem{Observability 강화를 위한 Prometheus와 Grafana 기반 모니터링 시스템 구축}
+        \resumeItem{Prometheus와 Grafana 기반 모니터링 시스템 구축으로 Observability 확보로 인해 불필요한 Worker EC2 비용 월 45\% 절감}
         \resumeItem{Presto에서 Trino로의 전환 후 쿼리 처리 속도 15\% 증가, 전환 과정에서 발생한 다양한 운영 이슈(OOM, 느린 쿼리)를 체계적으로 해결하여, 멀티테넌트 환경에서의 안정적인 서비스 제공}
+
     \resumeItemListEnd
 
     \resumeProject
@@ -245,7 +245,7 @@
     {FLO 서비스의 데이터 인프라 운영 및 자동화}
     \resumeItemListStart
         \resumeItem{Amazon S3 기반 데이터레이크 및 데이터웨어하우스 운영}
-        \resumeItem{Jenkins에서 Airflow로 스케줄러 전환 및 자동화}
+        \resumeItem{Jenkins에서 Airflow로 스케줄러 이관}
         \resumeItem{Spark on EMR을 활용한 데이터마트 구성}
         \resumeItem{AWS EMR, Amazon MWAA, Amazon EKS를 활용한 워크플로우 구축}
     \resumeItemListEnd
@@ -254,10 +254,9 @@
       {PySpark에서 Polars로의 마이그레이션}
       {소규모 EMR 클러스터에서 단일 EC2 인스턴스 기반 Polars로 전환하여 성능과 비용을 동시에 최적화}
       \resumeItemListStart
-        \resumeItem{워크로드 특성 분석을 통해 분산 처리가 과도함을 확인하고 단일 노드 쿼리 엔진으로 전환}
         \resumeItem{집계 작업 수행 시간 85.42\% 감소 (4분 5초 → 36초), 전체 소요 시간 10분 → 1분}
         \resumeItem{하드웨어 스펙 축소: 2노드(8 코어) → 단일 노드(4 코어), 메모리 48GB → 12GB}
-        \resumeItem{월간 운영 비용 71.13\% 절감 (\$19.81 → \$5.72)}
+        \resumeItem{일일 운영 비용 71.13\% 절감 (\$19.81 → \$5.72)}
       \resumeItemListEnd
 
     \resumeProject
@@ -289,12 +288,12 @@
         \item Trino 435 (★★★★☆)
         \item Polars (★★★☆☆)
     \end{itemize}
-    \resumeSkills{\textbf{Cloud Platforms} - AWS (EMR, Glue, MWAA, EKS, S3, EC2, RDS, DynamoDB)}
+    \resumeSkills{\textbf{Cloud Platforms} - AWS (EMR, Glue, MWAA, EKS, S3, EC2, DynamoDB, IAM, CloudWatch, Lambda)}
     \resumeSkills{\textbf{Data Pipeline \& Workflow} - Apache Airflow 2, Kafka S3 Sink Connect}
     \resumeSkills{\textbf{Container \& Orchestration}}
     \begin{itemize}[leftmargin=1em]
-        \item Kubernetes 1.3: Pod, Deployment 리소스 개발
-        \item Docker (★★★★☆)
+        \item Kubernetes 1.3: Pod, Deployment 개발
+        \item Docker
     \end{itemize}
     \resumeSkills{\textbf{Web Frameworks} - SpringBoot 2, FastAPI}
   \resumeSubHeadingListEnd
