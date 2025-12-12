@@ -120,11 +120,15 @@
 \section{\textbf{1. Spark History MCP + AI Agent로 Spark 분석 자동화하기}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: 100\%}
     
     {\textbf{주요 내용}:
     
-    매일 수십 개의 Spark 배치 작업을 운영하는 환경에서 작업 실패 시 수동으로 Spark UI, CloudWatch Logs, EMR 콘솔을 오가며 수시간씩 디버깅하던 문제를 해결하기 위해 SparkListener, Spark History MCP, AI Agent를 결합한 자동 분석 시스템을 구축했습니다. Spark 작업 실패 시 자동으로 감지하여 AI가 Spark History Server의 메트릭을 조회하고 원인 분석 및 해결책을 제시하는 End-to-End 파이프라인을 n8n으로 구성하고, 분석 결과를 Slack으로 자동 전송하는 시스템을 구현했습니다.
+    \textbf{상황}: 매일 80 개 정도의 Spark 배치 작업을 운영하는 환경에서 작업 실패 시 엔지니어가 수동으로 Spark UI, CloudWatch Logs, EMR 콘솔을 오가며 수시간씩 디버깅해야 하는 비효율적인 운영 상황이 지속되고 있었습니다.
+    
+    \textbf{과제}: Spark 작업 실패 시 자동으로 원인을 분석하고 해결책을 제시하는 End-to-End 자동화 시스템을 구축하여, 수동 디버깅 시간을 획기적으로 단축하고 운영 효율성을 향상시키는 것이 목표였습니다.
+    
+    SparkListener, Spark History MCP, AI Agent를 결합한 자동 분석 시스템을 구축했습니다. Spark 작업 실패 시 자동으로 감지하여 AI가 Spark History Server의 메트릭을 조회하고 원인 분석 및 해결책을 제시하는 End-to-End 파이프라인을 n8n으로 구성하고, 분석 결과를 Slack으로 자동 전송하는 시스템을 구현했습니다.
 
     \vspace{3mm}
     
@@ -282,9 +286,7 @@
     
     \textbf{주요 성과}:
         \begin{itemize}
-            \item 트러블슈팅 단계 6단계 → 3단계 (50\% 감소)
             \item 사람의 수동 분석 시간 100\% 감소 (최소 10분 이상 → 0분)
-            \item VPN 접속 및 여러 UI 탐색 불필요
             \item Spark Observability 확보: 실시간 이벤트 캡처, 자동 분석 프로세스 구축
         \end{itemize}
     
@@ -293,7 +295,7 @@
     \resumeSubProject{\textbf{SparkListener 구현 및 EMR 통합}}
     {
     
-    Py4J를 활용하여 Python으로 Java SparkListenerInterface를 구현하고, Spark 작업 실행 중 발생하는 모든 이벤트(Stage 실패, OOM, Data Skew 등)를 실시간으로 감지하여 n8n Webhook으로 전송하는 리스너를 개발했습니다.
+    Py4J를 활용하여 Spark 작업 실행 중 발생하는 모든 이벤트(Stage 실패, OOM, Data Skew 등)를 실시간으로 감지하여 n8n Webhook으로 전송하는 SparkListener를 개발했습니다.
 
         \vspace{1mm}
         \textbf{사용한 기술}: PySpark, Amazon EMR
@@ -303,7 +305,7 @@
     \resumeSubProject{\textbf{Spark History MCP 서버 구축 및 Persistent History Server 지원}}
     {
     
-    Spark History Server MCP를 기반으로, Transient EMR 클러스터 환경에서도 동작하도록 Persistent Spark History Server를 지원하도록 개선했습니다. 
+    Spark History Server MCP를 기반으로, EMR 클러스터 환경의 Spark History Server에서도 동작하도록 개선했습니다. 
 
         \vspace{1mm}
         \textbf{사용한 기술}: Spark History Server, MCP (Model Context Protocol), Python, Amazon EMR
@@ -313,7 +315,7 @@
     \resumeSubProject{\textbf{n8n AI Agent 워크플로우 구축}}
     {
     
-    n8n을 활용하여 Spark 에러 감지부터 분석 결과 전송까지의 전체 워크플로우를 자동화했습니다. HTTP Webhook으로 Spark 에러 정보를 수신하고, OpenAI GPT-5-mini 모델을 사용한 AI Agent가 Spark History MCP를 통해 메트릭을 조회하여 OOM, Data Skew, Shuffle Spill 등 원인을 분석하고 구체적인 해결책(설정 변경값, 단기/장기 전략)을 제시하도록 구성했습니다.
+    n8n을 활용하여 Spark 에러 감지부터 분석 결과 전송까지의 전체 워크플로우를 자동화했습니다. HTTP Webhook으로 Spark 에러 정보를 수신하고, OpenAI GPT-5-mini 모델을 사용한 AI Agent가 Spark History MCP를 통해 메트릭을 조회하여 OOM 등 원인을 분석하고 구체적인 해결책(설정 변경값, 단기/장기 전략)을 제시하도록 구성했습니다.
 
     \vspace{1mm}
     \textbf{사용한 기술}: n8n
@@ -323,11 +325,6 @@
     \resumeSubProjectListEnd
 
     %---------------- 서브 프로젝트 End
-
-    \textbf{문제 해결(링크)}:
-        \begin{itemize}
-            \item \href{https://music-flo.atlassian.net/wiki/spaces/~741938673/pages/4318134294}{Spark History MCP + AI Agent로 Spark 분석 자동화하기}
-        \end{itemize}
     
     %---------------- 트러블슛 End
 
@@ -337,11 +334,15 @@
 \section{\textbf{2. 액션로그 파이프라인}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: Broker를 기준으로 Consumer부터, 약 66\%}
     
     {\textbf{주요 내용}}:
     
-    액션로그 파이프라인 프로젝트는 대규모 로그 데이터(하루 2.5억건)를 신속하고 안정적으로 수집·처리·분석하기 위한 End-to-End 데이터 파이프라인을 구축하고 운영한 경험을 담고 있습니다. Kafka와 Amazon Glue Crawler 기반의 실시간 데이터 처리, S3 및 Amazon Glue를 이용한 데이터 레이크 구축, Airflow를 활용한 데이터 적재 작업 자동화와 운영 모니터링, 그리고 효율적인 파티션 설계를 통한 대용량 ETL 작업의 성능 최적화까지 다양한 데이터 엔지니어링 과제 전반을 맡아 수행했습니다.
+    \textbf{상황}: 대규모 로그 데이터(하루 2.5억건)가 발생하는 환경에서 기존 데이터 처리 시스템으로는 신속하고 안정적인 수집·처리·분석이 어려웠으며, 정제되지 않은 방대한 raw 데이터를 분석 가능한 데이터 마트로 구성하는데 오랜 시간이 소요되는 상황이었습니다.
+    
+    \textbf{과제}: 대용량 로그 데이터를 실시간으로 처리하고 분석할 수 있는 확장 가능하고 안정적인 End-to-End 데이터 파이프라인을 구축하여 데이터 처리 효율성과 신뢰성을 확보하고, 액션로그를 1시간 주기로 준실시간 조회할 수 있는 시스템을 제공하는 것이 목표였습니다.
+    
+    Kafka와 Amazon Glue Crawler 기반의 실시간 데이터 처리, S3 및 Amazon Glue를 이용한 데이터 레이크 구축, Airflow를 활용한 데이터 적재 작업 자동화와 운영 모니터링, 그리고 효율적인 파티션 설계를 통한 대용량 ETL 작업의 성능 최적화까지 다양한 데이터 엔지니어링 과제 전반을 맡아 수행했습니다.
 
     \vspace{3mm}
     
@@ -516,28 +517,30 @@
     \item ETL 파이프라인 자동화 및 준실시간 탐색을 위한 크롤러 구축
 \end{itemize}
 \begin{itemize}
-    \item S3 파티션 구조와 적재 정책을 최적화하여, 소규모 파일 문제를 해결하고 파티션 단위 처리 효율을 높여 Bronze에서 Silver로 ETL 처리하는 구간의 전체 작업 시간을 평균 약 35\% (22분 → 15분) 감축하였습니다.
+    \item S3 파티션 구조와 적재 정책을 최적화하여, 소규모 파일 문제를 해결하고 파티션 단위 처리 효율을 높여 Bronze에서 Silver로 ETL 처리하는 구간의 전체 Spark 작업 시간을 평균 약 35\% (22분 → 15분) 감축하였습니다.
 \end{itemize}
 
     \resumeSubProjectListStart
         \resumeSubProject {\textbf{메달리온 아키텍쳐 설계}}
         {
         
-        메달리온 아키텍처를 적용하여 로그 데이터를 여러 단계로 분리 및 정제함으로써, 데이터 품질과 신뢰성을 체계적으로 개선하였습니다. 원시 데이터 보존을 통해 언제든 재처리가 가능하고, 각 단계별 데이터 검증과 정합성 보장을 통해 오류 데이터는 낮은 단계에 격리하여 상위 단계에서는 정확하고 고품질 데이터를 확보하였습니다. 이로써 분석과 비즈니스 활용에 최적화된 신뢰성 높은 데이터 환경을 구축하였습니다.
+        메달리온 아키텍처를 적용하여 로그 데이터를 여러 단계로 분리 및 정제함으로써, 데이터 품질과 신뢰성을 체계적으로 개선하였습니다. 
+        
+        액션로그 클라이언트들의 조회 패턴을 분석하여 그 결과를 토대로 파티셔닝과 버켓팅 전략을 설계하고 적용했습니다. 원시 데이터 보존을 통해 언제든 재처리가 가능하고, 각 단계별 데이터 검증(null 처리, 중복 처리, 데이터 타입 변환)을 통해 오류 데이터는 낮은 단계에 격리하여 상위 단계에서는 정확하고 고품질 데이터를 확보하였습니다. 이로써 분석과 비즈니스 활용에 최적화된 신뢰성 높은 데이터 환경을 구축하였습니다.
         % 원시 데이터(Raw, Bronze) → 정제 데이터(Clean, Silver) → 고품질 데이터(Gold)로 계층화하여
         % 오류나 결함이 있는 데이터는 낮은 단계에 가두고, 상위 단계에서는 깨끗한 데이터만 사용함으로써 품질 보장함.
 
         \vspace{1mm}
-        \textbf{사용한 기술}: Amazon S3, Amazon Glue Data Catalog, Kafka Connect, Apache Spark
+        \textbf{사용한 기술}: Amazon S3, Amazon Glue Data Catalog, Apache Spark
         \vspace{2mm}
         }
-        \resumeSubProject {\textbf{데이터 수집 및 처리 최적화}}
+        \resumeSubProject {\textbf{데이터 수집 및 준실시간 파티션 등록}}
         
         {
         대용량 액션로그 데이터를 수집하기 위해 Kafka 기반의 스트리밍 플랫폼을 구축하고, Amazon Glue Crawler로 준실시간 파티션 등록과 Spark 배치 처리를 병행하는 하이브리드 아키텍처를 설계했습니다.
 
         \vspace{1mm}
-        \textbf{사용한 기술}: Apache Spark, Amazon Glue Crawler
+        \textbf{사용한 기술}: Apache Spark, Amazon Glue Crawler, Kafka Connect
         \vspace{2mm}
     }
     \resumeSubProject{\textbf{파티션 크기 조정 및 ETL 성능 개선}}
@@ -552,14 +555,18 @@
   \resumeProjectListEnd
 
 %-------------------------------------------
-\section{\textbf{3. 침해곡 탐지 파이프라인}}
+\section{\textbf{3. 침해곡 탐지 파이프라인 개편}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: 임베딩 추출(Tensorflow) 제외하고 모두, 약 80\%}
     
     {\textbf{주요 내용}}:
     
-    유통사에서 신규로 입수되는 오디오(하루 7만$\sim$16만 곡)를 FLO 플랫폼 내 500만 곡 보호 음원과 자동 비교해 침해곡(동일·변조곡)을 판별하는 대규모 파이프라인입니다. 파이프라인은 주기적으로 대규모 신규 데이터를 사전 처리하고, 임베딩 추출과 벡터 유사도 연산 단계를 시스템입니다. 과거 파이썬 기반 배치 시스템의 한계를 극복하고자, 데이터프레임 처리 엔진으로 Polars를 도입해 I/O 병목과 실행 비용을 크게 개선했습니다. 또한 벡터 데이터베이스 적용을 통해 수백만 곡 임베딩 간 유사도 필터링(코사인 거리 등) 처리 속도를 대폭 향상시켰으며, 전체 탐지 파이프라인의 정확도와 운영 효율이 올라갔습니다.
+    \textbf{상황}: 유통사에서 신규로 입수되는 오디오(하루 7만$\sim$16만 곡)를 FLO 플랫폼 내 500만 곡 보호 음원과 자동 비교해 침해곡을 판별하는 기존 파이프라인이 과도한 복잡성으로 인한 오버엔지니어링 문제와 낮은 탐지율로 인해 운영 효율성이 저하되는 상황이었습니다.
+    
+    \textbf{과제}: 대규모 음원 데이터 처리 성능을 개선하고 침해곡 탐지 정확도를 향상시키면서도, 시스템 복잡도를 줄이고 운영 비용을 절감할 수 있는 효율적인 파이프라인을 재구축하는 것이 목표였습니다.
+    
+    파이프라인은 주기적으로 대규모 신규 데이터를 사전 처리하고, 임베딩 추출과 벡터 유사도 연산 단계를 시스템입니다. 과거 파이썬 기반 배치 시스템의 한계를 극복하고자, 데이터프레임 처리 엔진으로 Polars를 도입해 I/O 병목과 실행 비용을 크게 개선했습니다. 또한 벡터 데이터베이스 적용을 통해 수백만 곡 임베딩 간 유사도 필터링(코사인 거리 등) 처리 속도를 대폭 향상시켰으며, 전체 탐지 파이프라인의 정확도와 운영 효율이 올라갔습니다.
 
     \vspace{3mm}
 
@@ -752,7 +759,7 @@
         \resumeSubProject {\textbf{Polars 기반 파이프라인 리뉴얼 및 운영 효율화}}
         {
         
-        레거시 파이썬 기반 데이터프레임 처리 시스템을 Rust+SIMD가 적용된 Polars 엔진으로 전환하여, 대용량 Parquet 데이터 처리 시간과 I/O 병목을 획기적으로 줄이고, 전체 파이프라인의 실행 비용과 리포트 출력 시간을 크게 단축시켰습니다.
+        레거시 파이썬 기반 데이터프레임 처리 시스템을 Polars 엔진으로 전환하여, 대용량 Parquet 데이터 처리 시간과 I/O 병목을 획기적으로 줄이고, 전체 파이프라인의 실행 비용과 리포트 출력 시간을 크게 단축시켰습니다.
     
         \vspace{1mm}
         \textbf{사용한 기술}: Python, Polars, Kubernetes(Amazon EKS), Amazon S3
@@ -765,11 +772,15 @@
 \section{\textbf{4. \href{https://trino.io/}{Trino} 구축 및 운영}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: Prometheus, Grafana 제외하고 약 70\%}
     
     {\textbf{주요 내용}}:
     
-    대규모 전사 멀티테넌트 데이터 플랫폼의 쿼리 엔진으로 Amazon EMR 기반 Presto를 사용하다가, Trino로 전환하는 프로젝트를 주도했습니다. 전환하면서 마주쳤던 다양한 문제를 해결하고, 쿼리 속도를 개선하였습니다.
+    \textbf{상황}: 대규모 전사 멀티테넌트 데이터 플랫폼의 쿼리 엔진으로 사용되던 Amazon EMR 기반 Presto의 운영권이 기존 조직에서 저희 조직으로 이관되었으나, Observability가 전혀 구축되어 있지 않아 성능 모니터링과 장애 대응이 어려운 상황이었습니다.
+    
+    \textbf{과제}: 부족한 Observability를 구축하여 시스템 가시성을 확보하고, 더 나은 성능과 안정성을 제공하는 Trino로 전환하여 쿼리 처리 성능을 개선하는 것이 목표였습니다.
+    
+    Trino로 전환하는 프로젝트를 주도하면서 마주쳤던 다양한 문제를 해결하고, 쿼리 속도를 개선하였습니다.
 
     %---------------- 주요 내용 End
 
@@ -910,7 +921,7 @@
 \section{\textbf{5. Amazon S3 기반 데이터레이크, 데이터웨어하우스 운영}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: 30\%}
     
     {\textbf{주요 내용}:
 
@@ -1083,11 +1094,15 @@ myarrow/.style={thick,->},
 \section{\textbf{6. PySpark에서 Polars로의 마이그레이션}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: 100\%}
     
     {\textbf{주요 내용}:
     
-    음악 스트리밍 플랫폼의 "연령별 차트" 집계 워크플로우를 소규모 EMR 클러스터에서 단일 EC2 인스턴스 기반 Polars로 전환한 프로젝트입니다. 기존 PySpark 환경에서는 클러스터 생성에 6분, 실제 집계에 4분으로 총 10분이 소요되었으나, 단일 노드 쿼리 엔진인 Polars로 전환하여 약 1분으로 단축했습니다. 워크로드 특성 분석을 통해 분산 처리가 과도하다고 판단하고, Apache Arrow 기반의 효율적인 단일 머신 쿼리 엔진을 도입하여 성능과 비용을 동시에 최적화했습니다.
+    \textbf{상황}: 음악 스트리밍 플랫폼의 "연령별 차트" 집계 워크플로우를 소규모 EMR 클러스터(2노드)로 운영하던 중, 클러스터 생성에 6분, 실제 집계에 4분으로 총 10분이 소요되어 클러스터 생성 시간이 실제 작업 시간보다 긴 비효율적인 상황이었습니다.
+    
+    \textbf{과제}: 워크로드 특성 분석을 통해 분산 처리의 필요성을 재검토하고, 데이터 기반 의사결정을 통해 PySpark에서 Polars로 전환할 수 있는 근거를 확보하여 성능과 비용을 동시에 최적화하는 것이 목표였습니다. \href{https://superhuman54.github.io/posts/journey-to-polars/}{상세한 분석과 검증 과정}을 통해 단일 노드 쿼리 엔진 채택을 결정했습니다.
+    
+    워크로드 특성 분석을 통해 분산 처리가 과도하다고 판단하고, Apache Arrow 기반의 효율적인 단일 머신 쿼리 엔진인 Polars를 도입하여 약 1분으로 단축했습니다.
 
     \vspace{3mm}
     
@@ -1128,10 +1143,15 @@ myarrow/.style={thick,->},
 \section{\textbf{7. 추천 데이터 HTTP 서버 구축과 운영}}
   \resumeProjectListStart
     \resumeProject
-    {\textbf{소속}: 드림어스컴퍼니} {}
+    {\textbf{소속}: 드림어스컴퍼니} {기여도: 100\%}
     
     {\textbf{주요 내용}:
-    기존 Flask 기반 HTTP 서버를 I/O 바운드 작업에 최적화된 FastAPI로 전환하였습니다. DynamoDB 조회가 많은 환경에서 FastAPI의 비동기 처리 덕분에 응답 지연 시간이 Flask의 약 500ms에서 FastAPI는 평균 120ms로 약 76\% 감소하여 처리 속도와 동시 처리 성능이 대폭 개선되었습니다. 또한, 타입 힌팅과 \href{https://python-dependency-injector.ets-labs.org/}{Dependency Injector} 도입으로 코드 품질과 유지보수성도 향상시켰습니다.
+    
+    \textbf{상황}: 기존 Flask 기반 HTTP 서버가 DynamoDB 조회가 많은 I/O 바운드 환경에서 약 500ms의 느린 응답 시간을 보였으며, 객체 지향적이지 않은 코드 구조로 인해 유지보수성과 코드 품질이 저하되는 문제가 있었습니다.
+    
+    \textbf{과제}: I/O 바운드 작업에 최적화되고 더 빠른 성능을 제공하는 FastAPI로 전환하여 응답 시간을 개선하고, 동시에 객체 지향적 설계와 타입 힌팅을 도입하여 코드 품질과 유지보수성을 향상시키는 것이 목표였습니다.
+    
+    FastAPI의 비동기 처리를 통해 응답 지연 시간을 평균 120ms로 약 76\% 감소시켜 처리 속도와 동시 처리 성능을 대폭 개선했습니다. 또한, 타입 힌팅과 \href{https://python-dependency-injector.ets-labs.org/}{Dependency Injector} 도입으로 코드 품질과 유지보수성도 향상시켰습니다.
     
     \textbf{주요 성과}:
     \begin{itemize}
