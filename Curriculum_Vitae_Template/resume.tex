@@ -143,9 +143,10 @@
 \section{}
   \resumeSubHeadingListStart
     \resumeSummary{
-    복잡한 데이터 문제를 해결하고 비즈니스 성장을 이끄는 데이터 엔지니어로서, 대용량 데이터 처리와 \\
-    파이프라인 구축에 탄탄한 배경을 갖추고 있습니다. 코드 레벨로 딥다이브하여 근본 원인을 파악하는 것을 \\ 선호합니다. 특히 트러블슈팅에 강점을 가지고 있어
-    안정적이고 확장 가능한 데이터 인프라 구축을 통해  \\ 비즈니스 가치 창출에 기여합니다.
+    \textbf{매일 2.5억} 건 이상의 대규모 로그 데이터를 안정적으로 처리하며, 데이터 문제의 근본 원인을 찾아 해결하는 \\ 
+    데이터 엔지니어입니다. 단순한 파이프라인 구축을 넘어, 코드 레벨의 깊이 있는 분석과 \textbf{집요한 트러블슈팅}으로 \\ 
+    시스템의 한계를 극복합니다. 안정성과 효율성을 모두 갖춘 데이터 인프라를 통해 조직의 운영 비용을 절감하고, \\ 
+    데이터의 가치를 극대화합니다.
     }
   \resumeSubHeadingListEnd
 
@@ -158,13 +159,12 @@
         \resumeItemListStart
             \resumeItem{AWS 클라우드 기반 대용량 데이터 파이프라인 구축 및 운영}
             \resumeItem{Spark, Polars 데이터 처리 및 분석 시스템 개발}
-            \resumeItem{사내 데이터 플랫폼 용도의 Trino 운영 및 최적화}
+            \resumeItem{사내 데이터 플랫폼 Trino 운영 및 최적화}
             \resumeItem{Amazon S3, Amazon Glue Catalog 기반 데이터레이크 및 데이터웨어하우스 운영}
             \resumeItem{Amazon Glue ETL 및 Spark 활용 준실시간 데이터 파이프라인 구축 및 운영}
-            \resumeItem{Amazon MWAA 활용 데이터 파이프라인 스케줄링 자동화}
+            \resumeItem{Amazon MWAA 활용 데이터 파이프라인 스케줄링}
             \resumeItem{음원 침해곡 탐지 파이프라인 운영}
-            \resumeItem{유사도 검색 및 대규모 임베딩 관리를 위한 PostgreSQL 기반 벡터 데이터베이스 운영}
-            \resumeItem{FastAPI 기반 추천 REST API 서버 개발}
+            \resumeItem{FastAPI 기반 오프라인 추천 시스템 REST API 서버 개발}
         \resumeItemListEnd   
         
     \resumeEmployment
@@ -172,7 +172,7 @@
       {서버 개발자 (정규직)}{2017.09 - 2019.07}
       \resumeItemListStart
           \resumeItem{AWS 클라우드 기반 서버 인프라 운영 및 관리}
-          \resumeItem{레스토랑 검색 서비스 백엔드 개발}
+          \resumeItem{API 백엔드 개발}
       \resumeItemListEnd
 
     \resumeEmployment
@@ -210,8 +210,8 @@
       {Spark 작업 실패 시 자동으로 원인 분석 및 해결책을 제시하는 AI 기반 자동 분석 시스템 구축}
       \resumeItemListStart
         \resumeItem{SparkListener 구현 및 EMR 통합으로 Spark 이벤트 실시간 감지}
-        \resumeItem{n8n AI Agent 워크플로우 구축으로 자동 분석 결과를 Slack으로 전송}
-        \resumeItem{사람의 수동 분석 시간 100\% 감소}
+        \resumeItem{n8n AI Agent 워크플로우 구축으로 자동 분석 결과 Slack 전송}
+        \resumeItem{\textbf{사람의 수동 분석 시간 100\% 감소}}
       \resumeItemListEnd
     
     \resumeProject
@@ -219,24 +219,24 @@
          {하루 약 2억 5천만 레코드를 처리하는 대용량 ETL 파이프라인 설계 및 운영}
          \resumeItemListStart
             \resumeItem{Kafka Connect 기반 스트리밍 데이터 수집 및 Amazon Glue ETL로 1시간 주기 준실시간 파티션 등록}
-            \resumeItem{메달리온 아키텍처 설계 및 클라이언트 조회 패턴 분석 기반 파티셔닝/버켓팅 최적화, 조회 속도 2.5배 증가}
+            \resumeItem{메달리온 아키텍처 설계 및 클라이언트 조회 패턴 분석 기반 파티셔닝/버켓팅 최적화, \textbf{조회 속도 2.5배 증가}}
          \resumeItemListEnd
     
     \resumeProject
       {침해곡 탐지 파이프라인}
       {음원 메타데이터 분석 및 유사도 검증 알고리즘을 이용하여 하루 최대 16만곡을 검수하는 지적재산권 침해 탐지 시스템}
       \resumeItemListStart
-        \resumeItem{벡터 유사도와 텍스트 유사도 기반 침해곡 자동 탐지 시스템 구축}
-        \resumeItem{Polars와 Kubernetes 조합으로 하루 운영 비용 73\% 절감, 총 소요시간 53\% 단축 (14시간→6.5시간)}
-        \resumeItem{Polars와 벡터 데이터베이스(PgVector)를 적용하여 동/변조곡 탐지 정확도 18\%p(5\% $\rightarrow$ 23\%) 향상}
+        \resumeItem{벡터 유사도와 텍스트 유사도 기반 침해곡 탐지 시스템 구축}
+        \resumeItem{Polars와 Kubernetes 조합으로 \textbf{하루 운영 비용 73\% 절감}, \textbf{총 소요시간 53\% 단축} (14시간→6.5시간)}
+        \resumeItem{Polars와 벡터 데이터베이스(PgVector)를 적용하여 \textbf{동/변조곡 탐지 정확도 18\%p}(5\% $\rightarrow$ 23\%) 향상}
     \resumeItemListEnd
     
     \resumeProject
       {쿼리 엔진 Trino 운영}
     {DW 조회를 위한 분산 쿼리 엔진 운영}
     \resumeItemListStart
-        \resumeItem{Prometheus와 Grafana 기반 모니터링 시스템 구축으로 Observability 확보로 인해 불필요한 Worker EC2 비용 월 45\% 절감}
-        \resumeItem{Presto에서 Trino로의 전환 후 쿼리 처리 속도 15\% 증가, 전환 과정에서 발생한 다양한 운영 이슈(OOM, 느린 쿼리)를 체계적으로 해결하여, 멀티테넌트 환경에서의 안정적인 서비스 제공}
+        \resumeItem{Prometheus와 Grafana 기반 모니터링 시스템 구축으로 Observability 확보로 인해 \textbf{불필요한 Worker EC2 비용 월 45\% 절감}}
+        \resumeItem{Presto에서 Trino로의 전환 후 \textbf{쿼리 처리 속도 15\% 증가}, 전환 과정에서 발생한 다양한 운영 이슈(OOM, 느린 쿼리)를 체계적으로 해결하여, 멀티테넌트 환경에서의 안정적인 서비스 제공}
 
     \resumeItemListEnd
 
@@ -254,16 +254,16 @@
       {PySpark에서 Polars로의 마이그레이션}
       {소규모 EMR 클러스터에서 단일 EC2 인스턴스 기반 Polars로 전환하여 성능과 비용을 동시에 최적화}
       \resumeItemListStart
-        \resumeItem{집계 작업 수행 시간 85.42\% 감소 (4분 5초 → 36초), 전체 소요 시간 10분 → 1분}
+        \resumeItem{집계 작업 수행 시간 \textbf{85.42\% 감소} (4분 5초 → 36초), 전체 소요 시간 10분 → 1분}
         \resumeItem{하드웨어 스펙 축소: 2노드(8 코어) → 단일 노드(4 코어), 메모리 48GB → 12GB}
-        \resumeItem{일일 운영 비용 71.13\% 절감 (\$19.81 → \$5.72)}
+        \resumeItem{일일 운영 비용 \textbf{71.13\% 절감} (\$19.81 → \$5.72)}
       \resumeItemListEnd
 
     \resumeProject
       {추천 데이터 HTTP 서버 구축}
     {FastAPI 기반 추천 데이터 HTTP 서버 개발}
     \resumeItemListStart
-        \resumeItem{기존 Flask 대비 비동기 처리 기반 FastAPI 도입으로 API 요청 지연시간 76\% 감축 및 동시성 향상}
+        \resumeItem{기존 Flask 대비 비동기 처리 기반 FastAPI 도입으로 API 요청 \textbf{지연시간 76\% 감축} 및 동시성 향상}
         \resumeItem{타입 힌팅 적용과 Dependency Injection으로 코드 안정성과 유지보수성 강화}
     \resumeItemListEnd
 
