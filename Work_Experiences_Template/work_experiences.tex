@@ -794,7 +794,7 @@
   \resumeProjectListEnd
 
 %-------------------------------------------
-\section{\textbf{4. \href{https://trino.io/}{Trino} 구축 및 운영}}
+\section{\textbf{4. Trino 구축 및 운영}}
   \resumeProjectListStart
     \resumeProject
     {\textbf{소속}: 드림어스컴퍼니} {}
@@ -805,6 +805,7 @@
     
     대규모 전사 멀티테넌트 데이터 플랫폼의 쿼리 엔진으로 사용되던 Amazon EMR 기반 Trino를 운영했습니다. 이 엔진은 고객의 이용권 정산 및 조회같은 중요한 배치 작업용 + 사내 데이터 조회용으로 사용되었습니다.
     
+    
     \textbf{상황}: 
     \begin{itemize}
         \item Presto의 운영권이 기존 조직에서 저희 조직으로 이관되었고, Observability가 전혀 구축되어 있지 않아 성능 모니터링과 장애 대응이 어려운 상황이었습니다.
@@ -814,6 +815,7 @@
     \begin{enumerate}
         \item 부족한 Observability를 구축하여 시스템 가시성 확보하고, 성능 모니터링과 장애 대응을 위한 모니터링 시스템 구축
         \item 사용자 쿼리 실패 시, 내결함성을 높이기 위한 자동 장애 대응
+        \item 비개발자들과의 소통을 통해 헤비쿼리를 교정하고, 최적화
     \end{enumerate}
 
     %---------------- 주요 내용 End
@@ -969,6 +971,7 @@
     \begin{itemize}
         \item 시간 기반으로 스케줄링된 파이프라인들의 연쇄 작업 관리가 어려웠습니다.
         \item Groovy 스크립트로 작성된 Jenkins 파이프라인의 유지보수가 어려웠습니다.
+        \item RDS를 데이터웨어하우스로 하루 한번 정기 배치로 적재하는 것으로는 DA의 긴급한 신규 테이블/컬럼 적재 요청에 대응하기 어려웠습니다.
     \end{itemize}
 
     \vspace{20mm}
@@ -1006,9 +1009,9 @@ compute/.style={
     minimum width=2cm,
     minimum height=0.7cm,
     thick,
-    fill=red!5!white,
+    fill=teal!10,
     font=\large\bfseries,
-    text=red!70!black,
+    text=teal!40!black,
 },
 catalog/.style={
     draw,
@@ -1019,6 +1022,18 @@ catalog/.style={
     fill=cyan!25,
     font=\large\bfseries,
     text=cyan!60!black,
+},
+inputstorage/.style={
+    draw,
+    cylinder,
+    shape border rotate=90,
+    aspect=0.12,
+    minimum width=1.8cm,
+    minimum height=0.5cm,
+    thick,
+    fill=red!10,
+    font=\large\bfseries,
+    text=red!80!black,
 },
 storage/.style={
     draw,
@@ -1053,9 +1068,9 @@ myarrow/.style={thick,->},
 
 \node[catalog]     (glue)     at (10,  1.5)  {Glue Catalog};
 % --- input
-\node[storage]     (rds)      at (3,  3.4)    {RDS};
-\node[storage]     (mongodb)  at (6,  3.4)    {S3 (Input)};
-\node[storage]     (s3in)     at (9,  3.4)    {MongoDB};
+\node[inputstorage]     (rds)      at (3,  3.4)    {RDS};
+\node[inputstorage]     (mongodb)  at (6,  3.4)    {S3 (Input)};
+\node[inputstorage]     (s3in)     at (9,  3.4)    {MongoDB};
 % --- output
 \node[storage]     (dynamodb) at (3, -1.1)  {DynamoDB};
 \node[storage]     (s3out)    at (6, -1.1)    {S3 (Output)};
@@ -1084,6 +1099,7 @@ myarrow/.style={thick,->},
     \textbf{주요 성과}:
         \begin{itemize}
             \item 워크플로우 스케줄러를 Jenkins에서 Airflow로 전환하여 언어, 플랫폼 일관성 확보로 개발 생산성 향상
+            \item 새로운 컬럼, 테이블 등 데이터 모델링 요구사항을 확보하기 위해, ad-hoc 파이프라인을 구축하여 데이터 공급 체계 마련
         \end{itemize}
     
     }
@@ -1098,13 +1114,15 @@ myarrow/.style={thick,->},
         \vspace{2mm}
     }
     
-    \resumeSubProject{\textbf{데이터 적재 자동화 및 모니터링 시스템 구축, \textbf{기여도}: 60\%}}
+    \resumeSubProject{\textbf{데이터 적재 자동화 \textbf{기여도}: 60\%}}
     {
     
-    Amazon S3를 데이터 레이크로 구축하고 AWS Glue Catalog와 연동하여 메타데이터 관리를 체계화했습니다. CloudWatch를 활용해 Amazon MWAA 및 EKS 클러스터 모니터링 시스템을 구현하고, Airflow DAG을 작성하여 자동화된 데이터 파이프라인을 운영하였습니다.
+    Amazon S3를 데이터 레이크로 구축하고 AWS Glue Catalog와 연동하여 메타데이터 관리를 체계화했습니다. 
+    매일 수행되는 정기 배치 외에도, DA의 긴급한 신규 테이블/컬럼 적재 요청에 유연하게 대응하기 위해 Ad-hoc 파이프라인을 구축했습니다. 
+    특정 테이블만 선별적으로 적재할 수 있는 Spark 애플리케이션을 개발하고, Airflow DAG Configuration으로 파라미터를 주입받아 실행하는 구조를 통해 신속한 데이터 공급 체계를 마련했습니다.
 
         \vspace{1mm}
-        \textbf{사용한 기술}: Amazon Glue Catalog, Amazon MWAA, Amazon EKS, Amazon CloudWatch 
+        \textbf{사용한 기술}: Amazon Glue Catalog, Amazon MWAA, Spark
         \vspace{2mm}
     }
 
